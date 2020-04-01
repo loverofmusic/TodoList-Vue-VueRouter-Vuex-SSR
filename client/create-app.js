@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Vuex from "vuex";
+import Meta from 'vue-meta'
 import App from "./app.vue";
 
 import createRouter from "./router";
@@ -8,8 +9,9 @@ import createStore from "./store";
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(Meta);
 
-// import "lib-flexible/flexible.js";
+
 import "./assets/styles/global.styl";
 
 export default () => {

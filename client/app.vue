@@ -30,6 +30,9 @@ import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 
 export default {
   // name: 'App',
+  metaInfo: {
+    title: 'Just Todo App'
+  },
   components: {
     Header,
     Footer
