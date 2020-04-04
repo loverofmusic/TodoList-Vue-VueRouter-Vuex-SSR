@@ -1,7 +1,7 @@
 <template>
   <div class="helper">
     <div class="left">{{ unFinishedTodoLength }} items left</div>
-    <div class="tabs">
+    <!-- <div class="tabs">
       <span
         v-for="state in states"
         :key="state"
@@ -10,7 +10,7 @@
       >
         {{ state }}
       </span>
-    </div>
+    </div> -->
     <div class="clear" @click="clearCompleted">Clear Completed</div>
   </div>
 </template>
@@ -27,22 +27,22 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      states: ["all", "active", "completed"]
-    };
-  },
+  // data() {
+  //   return {
+  //     states: ["all", "active", "completed"]
+  //   };
+  // },
   computed: {
     unFinishedTodoLength() {
       return this.todoLists.filter(t => !t.completed).length;
     }
   },
   methods: {
-    clickToggle(state) {
-      this.$emit("toggle", state);
-    },
+    // clickToggle(state) {
+    //   this.$emit('toggle', state);
+    // },
     clearCompleted() {
-      this.$emit('clear')
+      this.$emit('clear');
     }
   }
 };
@@ -56,7 +56,7 @@ export default {
     padding 30px 0
     background-color #ffffff
     font-size 28px
-    
+
 .left, .clear, .tabs
     padding 0 10px
 .left .clear

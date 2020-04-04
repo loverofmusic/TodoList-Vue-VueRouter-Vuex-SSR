@@ -37,7 +37,8 @@ if (isDev) {
       hot: true,
       historyApiFallback: {
         index: '/public/index.html'
-      }
+      },
+      headers: {'Access-Control-Allow-Origin': '*'}
     },
     module: {
       rules: [

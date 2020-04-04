@@ -1,3 +1,9 @@
+/**
+ * 文件功能描述：
+ * webpack dev compiler，
+ * 帮我们编译出server bundle
+ * 每一次有文件变化时，就会重新赋值一个bundle
+ */
 const Router = require('koa-router')
 const axios = require('axios')
 const path = require('path')

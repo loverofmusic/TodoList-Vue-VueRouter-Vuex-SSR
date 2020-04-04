@@ -1,5 +1,11 @@
 <template>
   <section class="real-app">
+    <div class="tab-container">
+      <tabs :value="filter" @change="handleChangeTab">
+        <tab :label="tab" :index="tab" v-for="tab in stats" :key="tab" />
+      </tabs>
+    </div>
+
     <input
       type="text"
       class="add-input"
@@ -8,20 +14,21 @@
       @keyup.enter="addTodo"
     />
     <Item :todo="t" v-for="t in filteredTodos" :key="t.id" @del="deleteTodo" />
-    <Tab
+    <!-- <Helper
       :filter="filter"
       :todoLists="todos"
       @toggle="toggleFilter"
       @clear="clearAllCompleted"
-    ></Tab>
+    ></Helper> -->
+    <Helper :filter="filter" :todoLists="todos" @clear="clearAllCompleted"></Helper>
 
     <!-- <router-view></router-view> -->
   </section>
 </template>
 
 <script>
-import Item from "./item.vue";
-import Tab from "./tab.vue";
+import Item from './item.vue';
+import Helper from './helper.vue';
 let id = 0;
 export default {
   // beforeRouteEnter (to, from, next) {
@@ -43,26 +50,27 @@ export default {
   // },
   components: {
     Item,
-    Tab
+    Helper
   },
-  props: ["id"],
-  mounted(){
+  props: ['id'],
+  mounted() {
     // console.log(this.$route)
     // console.log(this.id)
     // console.log('todo mounted')//如果是同一个路由但是动态参数不一样，之间跳转，是不会触发的，就必须使用beforeRouteUpdate；
   },
   data() {
     return {
-      filter: "all",
-      todos: []
+      filter: 'all',
+      todos: [],
+      stats: ['all', 'active', 'completed']
     };
   },
   computed: {
     filteredTodos() {
-      if (this.filter === "all") {
+      if (this.filter === 'all') {
         return this.todos;
       }
-      const completed = this.filter === "completed";
+      const completed = this.filter === 'completed';
       return this.todos.filter(t => t.completed === completed);
     }
   },
@@ -75,7 +83,7 @@ export default {
           content: e.target.value.trim(),
           completed: false
         });
-        e.target.value = "";
+        e.target.value = '';
       }
     },
     deleteTodo(id) {
@@ -91,6 +99,9 @@ export default {
     clearAllCompleted() {
       // console.log(this.todos);
       this.todos = this.todos.filter(t => !t.completed);
+    },
+    handleChangeTab(value) {
+      this.filter = value;
     }
   }
 };
@@ -109,5 +120,9 @@ export default {
     border 0
     margin 0
     border-radius 0
-    border-bottom 1px solid #ddd;/* no */  
+    border-bottom 1px solid #ddd;/* no */
+
+.tab-container
+  background-color #fff
+  padding 0 15px
 </style>

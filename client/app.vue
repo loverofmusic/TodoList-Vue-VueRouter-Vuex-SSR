@@ -9,24 +9,27 @@
       <!-- <router-link to="/login/exact">login exact</router-link> -->
       <!-- <router-link to="/app/123">app</router-link> -->
       <!-- <router-link to="/app/456">app</router-link> -->
+
       <transition name="fade">
         <router-view />
       </transition>
 
+      <!-- <notification content="test notify"></notification> -->
+      <button @click="notify">add notify</button>
       <Footer />
       <!-- <router-view name="a" /> -->
-      <p v-if="true">{{count}}</p>
+      <!-- <p v-if="false">{{count}}</p>
       <p v-if="false">{{fullName}}</p>
-      <p v-if="false">{{counter}}</p>
+      <p v-if="false">{{counter}}</p> -->
     </div>
   </div>
 </template>
 
 <script>
-import Header from "./layout/header.vue";
-import Footer from "./layout/footer.vue";
+import Header from './layout/header.vue';
+import Footer from './layout/footer.vue';
 // import Todo from "./views/todo/todo.vue";
-import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   // name: 'App',
@@ -39,6 +42,10 @@ export default {
     // Todo
   },
   mounted() {
+    this.$notify({
+      content: 'test notify',
+      btn: 'close'
+    });
     // console.log(this.$store);
 
     // let i = 1;
@@ -55,14 +62,20 @@ export default {
     //   num: 5,
     //   time: 2000
     // })
-    this.updateCountAsync({
-      num: 500000,
-      time: 2000
-    })
+    // this.updateCountAsync({
+    //   num: 500000,
+    //   time: 2000
+    // })
   },
   methods: {
-    ...mapActions(['updateCountAsync']),
-    ...mapMutations(['updateCount'])
+    // ...mapActions(['updateCountAsync']),
+    // ...mapMutations(['updateCount']),
+    notify() {
+      this.$notify({
+        content: 'test notify',
+        btn: 'close'
+      });
+    }
   },
   computed: {
     // count() {
@@ -73,7 +86,7 @@ export default {
     //   counter: 'count'
     // }),
     ...mapState({
-      counter: (state) => state.count + 5
+      counter: state => state.count + 5
     }),
     // fullName() {
     //   return this.$store.getters.fullName
